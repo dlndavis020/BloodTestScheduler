@@ -13,13 +13,15 @@ import javax.swing.GroupLayout;
  */
 public class GUI extends javax.swing.JFrame {
     private nextPatientPQ patientPQ;
+    private NoShowQueue showQueue;
     /**
      * Creates new form GUI
      */
     //Constructor to initialize the GUI
     public GUI() {
-        //Initialize the priority queue
+        //Initialize Both the priority queue and queue
         patientPQ = new nextPatientPQ();
+        showQueue = new NoShowQueue();
         //Initialize GUI Components
         initComponents();
         //Create the Title of the window
@@ -119,8 +121,18 @@ public class GUI extends javax.swing.JFrame {
         jLabel8.setText("All Patients");
 
         priorityPatient.setText("Priority Patient");
+        priorityPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priorityPatientActionPerformed(evt);
+            }
+        });
 
         noShow.setText("No Show List");
+        noShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noShowActionPerformed(evt);
+            }
+        });
 
         nextPatientArea.setEditable(false);
         nextPatientArea.setColumns(20);
@@ -315,6 +327,59 @@ public class GUI extends javax.swing.JFrame {
         //Informs user that the New Patient info has been saved
         JOptionPane.showMessageDialog(null, "Patient information has been saved");
     }//GEN-LAST:event_confirmActionPerformed
+
+    private void priorityPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priorityPatientActionPerformed
+        // TODO add your handling code here:
+        //Will check if the PQ is not empty
+        if(!patientPQ.isEmpty()) {
+            //Will dequeue the next patient
+            PQElement pqElement = (PQElement) patientPQ.dequeue();
+            Patients p1 = (Patients)pqElement.getElement();
+            
+            //Set the Next Patient Area text to blank
+            nextPatientArea.setText("");
+            
+            //Will display the next patients information
+            nextPatientArea.append("The next patient is: " + p1.getName() + "\n");
+            nextPatientArea.append("Patients age: " + p1.getAge() + "\n");
+            nextPatientArea.append("Patients GP name: " + p1.getGpName() + "\n");
+            nextPatientArea.append("Patients GP address:\n " + p1.getGpAddress() + "\n");
+            
+            //This sets the All Patients area back to blank then updates it with the most current PQ List
+            allPatientsArea.setText("");
+            allPatientsArea.append(patientPQ.printPQueue());
+
+        }else
+            //This will clear the Next Patient Area and inform the user there are no more patients
+            if(patientPQ.isEmpty()) {
+                nextPatientArea.setText("");
+                nextPatientArea.append("There is no patient in the queue\n");
+            }
+    }//GEN-LAST:event_priorityPatientActionPerformed
+
+    private void noShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noShowActionPerformed
+        // TODO add your handling code here:
+        if(!patientPQ.isEmpty()) {
+            //This will dequeue Current patient from the priority Queue
+            PQElement pqElement = (PQElement) patientPQ.dequeue();
+            Patients p =  (Patients)pqElement.getElement();
+
+            //This will add the patient to the no show Queue
+            showQueue.enqueue(p);
+            //This will remove the patient that is longest in the no show list if there are already 5 patients
+            showQueue.dequeue();
+
+            //The No Show Part of the GUI will be updated with the patient info
+            JOptionPane.showMessageDialog(null, "Patient has been moved to the no show list");
+            noShowArea.setText("");
+            String noShowList = showQueue.printQueue();
+            noShowArea.append(noShowList);
+
+            //This sets the All Patients area back to blank then updates it with the most current PQ List
+            allPatientsArea.setText("");
+            allPatientsArea.append(patientPQ.printPQueue());
+        }
+    }//GEN-LAST:event_noShowActionPerformed
 
     /**
      * @param args the command line arguments

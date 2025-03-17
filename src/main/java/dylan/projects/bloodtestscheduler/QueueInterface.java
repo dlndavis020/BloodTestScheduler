@@ -5,9 +5,14 @@
 package dylan.projects.bloodtestscheduler;
 
 /**
- *
- * @author dlnda
+ * @author Dylan White X21130515
+ * BloodTestScheduler
+ * This will define which methods will be used for the Priority Queue
  */
 public interface QueueInterface {
-    
+    public boolean isEmpty();
+    public int size();
+    public void enqueue(Object element);
+    public Object dequeue();
+    public Object printQueue();
 }

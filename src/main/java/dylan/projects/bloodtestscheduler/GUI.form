@@ -310,11 +310,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Priority Patient"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priorityPatientActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="noShow">
           <Properties>
             <Property name="text" type="java.lang.String" value="No Show List"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="noShowActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane3">
           <AuxValues>
