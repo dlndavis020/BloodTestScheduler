@@ -3,18 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package dylan.projects.bloodtestscheduler;
-
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.GroupLayout;
 /**
  *
  * @author dlnda
  */
 public class GUI extends javax.swing.JFrame {
-
+    private nextPatientPQ patientPQ;
     /**
      * Creates new form GUI
      */
+    //Constructor to initialize the GUI
     public GUI() {
+        //Initialize the priority queue
+        patientPQ = new nextPatientPQ();
+        //Initialize GUI Components
         initComponents();
+        //Create the Title of the window
+        setTitle("Blood Test Scheduler");
+        //Set the size of the window
+        setSize(900, 680);
     }
 
     /**
@@ -31,7 +42,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        ageField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         gpField = new javax.swing.JTextField();
@@ -63,11 +74,17 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel2.setText("Name: ");
 
+        nameField.setPreferredSize(new java.awt.Dimension(64, 22));
+
         jLabel3.setText("Age:");
+
+        ageField.setPreferredSize(new java.awt.Dimension(40, 22));
 
         jLabel4.setText("GP Name:");
 
         jLabel5.setText("GP Address:");
+
+        gpField.setPreferredSize(new java.awt.Dimension(100, 22));
 
         gpAddressField.setColumns(20);
         gpAddressField.setRows(5);
@@ -88,7 +105,13 @@ public class GUI extends javax.swing.JFrame {
         hospitalYes.setText("Yes");
 
         confirm.setText("Confirm");
+        confirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmActionPerformed(evt);
+            }
+        });
 
+        allPatientsArea.setEditable(false);
         allPatientsArea.setColumns(20);
         allPatientsArea.setRows(5);
         jScrollPane2.setViewportView(allPatientsArea);
@@ -99,12 +122,14 @@ public class GUI extends javax.swing.JFrame {
 
         noShow.setText("No Show List");
 
+        nextPatientArea.setEditable(false);
         nextPatientArea.setColumns(20);
         nextPatientArea.setRows(5);
         jScrollPane3.setViewportView(nextPatientArea);
 
         jLabel9.setText("Priority Patients");
 
+        noShowArea.setEditable(false);
         noShowArea.setColumns(20);
         noShowArea.setRows(5);
         jScrollPane4.setViewportView(noShowArea);
@@ -130,18 +155,17 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(urgencyMedium)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(urgencyUrgent))
-                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ageField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(gpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addGroup(mainPanelLayout.createSequentialGroup()
@@ -178,18 +202,18 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(21, 21, 21)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ageField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(gpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(21, 21, 21)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -241,6 +265,57 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
+        // TODO add your handling code here:
+                //Take user input
+        String name = nameField.getText();
+        String age = ageField.getText();
+        String gpName = gpField.getText();
+        String gpAddress = gpAddressField.getText();
+
+        //Parse Age from String to Integer
+        int iAge = Integer.parseInt(age);
+
+        //Create new patient object
+        Patients p = new Patients();
+        p.setName(name);
+        p.setGpName(gpName);
+        p.setGpAddress(gpAddress);
+        p.setAge(String.valueOf(iAge));
+
+        //Create an instance of PriorityAssignment
+        PriorityAssignment pa = new PriorityAssignment();
+
+        //Get the urgency, hospital priority and age priority of each patient
+        int urgency = pa.urgencyLevel(urgencyLow.isSelected(), urgencyMedium.isSelected(), urgencyUrgent.isSelected());
+        int hospitalPriority = pa.hospitalRequirement(hospitalYes.isSelected(), hospitalNo.isSelected());
+        int agePriority = pa.agePriority(iAge);
+
+        // Calculate the overall priority
+        int priority = pa.priorityLevel(urgency, hospitalPriority, agePriority);
+
+        // Enqueue the patient with the calculated priority
+        patientPQ.enqueue(priority, p);
+
+        //Display the patient in the all Patient Area
+        allPatientsArea.setText("");
+        allPatientsArea.append(patientPQ.printPQueue());
+
+        //Clears New Patient fields
+        nameField.setText("");
+        ageField.setText("");
+        gpField.setText("");
+        gpAddressField.setText("");
+        urgencyLow.setSelected(false);
+        urgencyMedium.setSelected(false);
+        urgencyUrgent.setSelected(false);
+        hospitalYes.setSelected(false);
+        hospitalNo.setSelected(false);
+
+        //Informs user that the New Patient info has been saved
+        JOptionPane.showMessageDialog(null, "Patient information has been saved");
+    }//GEN-LAST:event_confirmActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -277,6 +352,7 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ageField;
     private javax.swing.JTextArea allPatientsArea;
     private javax.swing.JButton confirm;
     private javax.swing.JTextArea gpAddressField;
@@ -297,7 +373,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextField nameField;
     private javax.swing.JTextArea nextPatientArea;

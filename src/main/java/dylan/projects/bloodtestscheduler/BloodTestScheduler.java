@@ -11,6 +11,9 @@ package dylan.projects.bloodtestscheduler;
 public class BloodTestScheduler {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        //Create an instance of the GUI
+        GUI patientGUI = new GUI();
+        //Make the GUI visible
+        patientGUI.setVisible(true);
     }
 }
