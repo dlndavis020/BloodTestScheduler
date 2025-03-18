@@ -5,8 +5,8 @@
 package dylan.projects.bloodtestscheduler;
 
 /**
- *
- * @author dlnda
+ * @author Dylan White X21130515
+ * BloodTestScheduler
  */
 public class BloodTestScheduler {
 

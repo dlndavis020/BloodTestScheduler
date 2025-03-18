@@ -23,16 +23,8 @@ public class PQElement {
         return key;
     }
 
-    public void setKey(int val) {
-        key = val;
-    }
-
     public Patients getElement() {
         return element;
-    }
-
-    public void setElement(Patients p) {
-        element = p;
     }
 
     public String printPatient(){
